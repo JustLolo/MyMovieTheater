@@ -8,11 +8,11 @@ import { RootStackParamList } from "../navigation/Navigation"
 import { useMovies } from "../hooks/useMovies"
 import { MoviePoster } from "../components/MoviePoster"
 import { Movie } from "../interfaces/movieInterface";
+import { HorizontalSlider } from "../components/HorizontalSlider";
 
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
 
 const windowWidth = Dimensions.get('window').width;
-const cardsSeparation = 9;
 
 export const HomeScreen = ({navigation}: Props) => {
 
@@ -34,6 +34,7 @@ export const HomeScreen = ({navigation}: Props) => {
 			{/* <View style={{ marginTop: top + 20 }}> */}
 			{/* <Button title="Go to Detail Screen" onPress={() => navigation.navigate('DetailScreen')}/>			 */}
 			{/* <MoviePoster movie={moviesInCinema[0]}/> */}
+			
 			<View
 				style={{ height: 440 }}
 			>
@@ -44,35 +45,18 @@ export const HomeScreen = ({navigation}: Props) => {
 					renderItem={({ item }) => <MoviePoster movie={item}/>}
 					sliderWidth={ windowWidth }
 					itemWidth={ 300 }
+					inactiveSlideOpacity={0.9}
 				/>
 			</View>
 			
 			{/* secundary carousel */}
-			<View style={{ 
-				// backgroundColor: 'red', 
-				height: 280,
-				paddingLeft: cardsSeparation,
-				}}>
-				<Text style={{ 
-					color: 'black',
-					fontSize: 30,
-					fontWeight: 'bold',
-				}}>En Cine</Text>
-				<FlatList
-					data={moviesInCinema}
-					renderItem={({ item }) => (
-						<MoviePoster movie={item} width={140} height={200}/>
-					)}
-					
-					ItemSeparatorComponent={() => 
-						<View style={{ width: cardsSeparation }}></View>
-					}
-
-					keyExtractor={( movie ) => movie.id.toString()}
-					showsHorizontalScrollIndicator={false}
-					horizontal
-				/>
-			</View>
+			<HorizontalSlider title="Movies in Theaters" movies={moviesInCinema}/>
+			<HorizontalSlider movies={moviesInCinema}/>
+			<HorizontalSlider title="Movies in Theaters" movies={moviesInCinema}/>
+			<HorizontalSlider movies={moviesInCinema}/>
+			<HorizontalSlider title="Movies in Theaters" movies={moviesInCinema}/>
+			<HorizontalSlider movies={moviesInCinema}/>
+			
 		</ScrollView>
 
 	)
