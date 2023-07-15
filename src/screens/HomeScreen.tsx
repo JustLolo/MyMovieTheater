@@ -3,6 +3,7 @@ import { Button, Text, View } from "react-native"
 import { RootStackParamList } from "../navigation/Navigation"
 import movieDB from "../api/movieDB"
 import { useEffect } from "react"
+import { MovieDBNowPlaying } from "../interfaces/movieInterface"
 
 
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
@@ -10,9 +11,9 @@ interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
 export const HomeScreen = ({navigation}: Props) => {
 	
 	useEffect(() => {
-	  movieDB.get('/now_playing')
+	  movieDB.get<MovieDBNowPlaying>('/now_playing')
 	  .then( resp => {
-		console.log(resp)
+		console.log(resp.data.results[0].title)
 	  })
 	
 	}, [])
