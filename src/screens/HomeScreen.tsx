@@ -1,5 +1,5 @@
 import { StackScreenProps } from "@react-navigation/stack"
-import { ActivityIndicator, Button, Dimensions, Text, View, FlatList, StyleSheet } from "react-native"
+import { ActivityIndicator, Button, Dimensions, Text, View, FlatList, StyleSheet, ScrollView } from "react-native"
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -30,7 +30,8 @@ export const HomeScreen = ({navigation}: Props) => {
 	console.log(moviesInCinema[1].title)
 
 	return (
-		<View style={{ marginTop: top + 20 }}>
+		<ScrollView style={{ marginTop: top + 20 }}>
+			{/* <View style={{ marginTop: top + 20 }}> */}
 			{/* <Button title="Go to Detail Screen" onPress={() => navigation.navigate('DetailScreen')}/>			 */}
 			{/* <MoviePoster movie={moviesInCinema[0]}/> */}
 			<View
@@ -72,6 +73,7 @@ export const HomeScreen = ({navigation}: Props) => {
 					horizontal
 				/>
 			</View>
-		</View>
+		</ScrollView>
+
 	)
 }
