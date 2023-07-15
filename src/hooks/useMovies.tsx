@@ -9,6 +9,7 @@ export const useMovies = () => {
 
 	async function getMovies() {
 		let movies : Movie[] = [];
+		// TODO: handle errors
 		const resp = await movieDB.get<MovieDBNowPlaying>('/now_playing')
 		movies = resp.data.results;
 		return movies

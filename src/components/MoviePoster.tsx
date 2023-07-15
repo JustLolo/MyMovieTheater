@@ -6,10 +6,8 @@ interface Props {
 }
 
 export const MoviePoster = ({ movie }: Props) => {
-	console.log(movie.poster_path)
-	
 	const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-	console.log(uri)
+	console.log(`Rendered <MoviePoster />: ${uri}`)
 
 
 	return (
