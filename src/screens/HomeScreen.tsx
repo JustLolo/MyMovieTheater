@@ -1,5 +1,5 @@
 import { StackScreenProps } from "@react-navigation/stack"
-import { ActivityIndicator, Button, Dimensions, Text, View } from "react-native"
+import { ActivityIndicator, Button, Dimensions, Text, View, FlatList, StyleSheet } from "react-native"
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -12,6 +12,7 @@ import { Movie } from "../interfaces/movieInterface";
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
 
 const windowWidth = Dimensions.get('window').width;
+const cardsSeparation = 9;
 
 export const HomeScreen = ({navigation}: Props) => {
 
@@ -45,6 +46,32 @@ export const HomeScreen = ({navigation}: Props) => {
 				/>
 			</View>
 			
+			{/* secundary carousel */}
+			<View style={{ 
+				// backgroundColor: 'red', 
+				height: 280,
+				paddingLeft: cardsSeparation,
+				}}>
+				<Text style={{ 
+					color: 'black',
+					fontSize: 30,
+					fontWeight: 'bold',
+				}}>En Cine</Text>
+				<FlatList
+					data={moviesInCinema}
+					renderItem={({ item }) => (
+						<MoviePoster movie={item} width={140} height={200}/>
+					)}
+					
+					ItemSeparatorComponent={() => 
+						<View style={{ width: cardsSeparation }}></View>
+					}
+
+					keyExtractor={( movie ) => movie.id.toString()}
+					showsHorizontalScrollIndicator={false}
+					horizontal
+				/>
+			</View>
 		</View>
 	)
 }
