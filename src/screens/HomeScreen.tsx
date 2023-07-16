@@ -34,9 +34,7 @@ export const HomeScreen = ({navigation}: Props) => {
 				style={{ height: 440 }}
 			>
 				<Carousel
-					// ref={(c) => { this._carousel = c; }}
 					data={ movies.nowPlaying }
-					// renderItem={() => <MoviePoster movie={moviesInCinema[0]}/>}
 					renderItem={({ item }) => <MoviePoster movie={item}/>}
 					sliderWidth={ windowWidth }
 					itemWidth={ 300 }

@@ -50,11 +50,19 @@ export enum OriginalLanguage {
 
 // Converts JSON strings to/from your types
 export class Convert {
-    public static toMovieDBNowPlaying(json: string): MovieDBMoviesResponse {
+    public static toMovieDB(json: string): MovieDBMoviesResponse {
         return JSON.parse(json);
     }
 
-    public static movieDBNowPlayingToJson(value: MovieDBMoviesResponse): string {
+    public static movieDBToJson(value: MovieDBMoviesResponse): string {
+        return JSON.stringify(value);
+    }
+
+    public static toMovie(json: string): Movie {
+        return JSON.parse(json);
+    }
+
+    public static movieToJson(value: Movie): string {
         return JSON.stringify(value);
     }
 }
