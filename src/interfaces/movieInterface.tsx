@@ -3,9 +3,15 @@
 //   import { Convert, MovieDBNowPlaying } from "./file";
 //
 //   const movieDBNowPlaying = Convert.toMovieDBNowPlaying(json);
+export const enum Endpoints {
+    now_playing = "/now_playing",
+    popular = "/popular",
+    top_rated = "/top_rated",
+    upcoming = "/upcoming",
+}
 
-export interface MovieDBNowPlaying {
-    dates:         Dates;
+export interface MovieDBMoviesResponse {
+    dates?:         Dates;
     page:          number;
     results:       Movie[];
     total_pages:   number;
@@ -35,17 +41,18 @@ export interface Movie {
 }
 
 export enum OriginalLanguage {
+    // TODO: check this
     En = "en",
     Fi = "fi",
 }
 
 // Converts JSON strings to/from your types
 export class Convert {
-    public static toMovieDBNowPlaying(json: string): MovieDBNowPlaying {
+    public static toMovieDBNowPlaying(json: string): MovieDBMoviesResponse {
         return JSON.parse(json);
     }
 
-    public static movieDBNowPlayingToJson(value: MovieDBNowPlaying): string {
+    public static movieDBNowPlayingToJson(value: MovieDBMoviesResponse): string {
         return JSON.stringify(value);
     }
 }

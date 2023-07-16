@@ -16,7 +16,7 @@ const windowWidth = Dimensions.get('window').width;
 
 export const HomeScreen = ({navigation}: Props) => {
 
-	const { isLoading, moviesInCinema } = useMovies();
+	const { isLoading, moviesInCinema, popularMovies, topRatedMovies, upcomingMovies } = useMovies();
 	const { top } = useSafeAreaInsets();
 
 	if (isLoading) {
@@ -26,14 +26,10 @@ export const HomeScreen = ({navigation}: Props) => {
 			</View>
 		)
 	}
-	
-	console.log(moviesInCinema[1].title)
 
 	return (
 		<ScrollView style={{ marginTop: top + 20 }}>
-			{/* <View style={{ marginTop: top + 20 }}> */}
 			{/* <Button title="Go to Detail Screen" onPress={() => navigation.navigate('DetailScreen')}/>			 */}
-			{/* <MoviePoster movie={moviesInCinema[0]}/> */}
 			
 			<View
 				style={{ height: 440 }}
@@ -49,15 +45,10 @@ export const HomeScreen = ({navigation}: Props) => {
 				/>
 			</View>
 			
-			{/* secundary carousel */}
-			<HorizontalSlider title="Movies in Theaters" movies={moviesInCinema}/>
-			<HorizontalSlider movies={moviesInCinema}/>
-			<HorizontalSlider title="Movies in Theaters" movies={moviesInCinema}/>
-			<HorizontalSlider movies={moviesInCinema}/>
-			<HorizontalSlider title="Movies in Theaters" movies={moviesInCinema}/>
-			<HorizontalSlider movies={moviesInCinema}/>
-			
+			{/* Popular movies */}
+			<HorizontalSlider title="Popular" movies={popularMovies}/>
+			<HorizontalSlider title="Top" movies={topRatedMovies}/>
+			<HorizontalSlider title="Upcoming" movies={upcomingMovies}/>
 		</ScrollView>
-
 	)
 }

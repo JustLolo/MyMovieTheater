@@ -1,5 +1,9 @@
 API documentation: https://developer.themoviedb.org/
 
+IMPORTANT TODO:
+[ ] Remove Api keys
+[ ] check TODOS around the codebase
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
