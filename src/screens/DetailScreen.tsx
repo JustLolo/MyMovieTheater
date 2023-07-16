@@ -1,7 +1,8 @@
 import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { RootStackParamList } from "../navigation/Navigation"
-import { forHorizontalIOS } from "@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators"
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props extends StackScreenProps<RootStackParamList, 'DetailScreen'> {};
 
@@ -25,6 +26,14 @@ export const DetailScreen = ({ route } : Props) => {
 			<View style={styles.marginContainer}>
 				<Text style={ styles.subtitle }>{ movie.original_title }</Text>
 				<Text style={ styles.title }>{ movie.title }</Text>
+			</View>
+
+			<View style={styles.marginContainer}>
+				<Icon 
+					name="star-outline" 
+					color="grey"
+					size={20}
+				/>
 			</View>
 		</ScrollView>
 	)
