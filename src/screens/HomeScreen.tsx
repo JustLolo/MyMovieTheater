@@ -16,7 +16,7 @@ const windowWidth = Dimensions.get('window').width;
 
 export const HomeScreen = ({navigation}: Props) => {
 
-	const { isLoading, moviesInCinema, popularMovies, topRatedMovies, upcomingMovies } = useMovies();
+	const { isLoading, movies } = useMovies();
 	const { top } = useSafeAreaInsets();
 
 	if (isLoading) {
@@ -36,7 +36,7 @@ export const HomeScreen = ({navigation}: Props) => {
 			>
 				<Carousel
 					// ref={(c) => { this._carousel = c; }}
-					data={ moviesInCinema }
+					data={ movies.nowPlaying }
 					// renderItem={() => <MoviePoster movie={moviesInCinema[0]}/>}
 					renderItem={({ item }) => <MoviePoster movie={item}/>}
 					sliderWidth={ windowWidth }
@@ -46,9 +46,9 @@ export const HomeScreen = ({navigation}: Props) => {
 			</View>
 			
 			{/* Popular movies */}
-			<HorizontalSlider title="Popular" movies={popularMovies}/>
-			<HorizontalSlider title="Top" movies={topRatedMovies}/>
-			<HorizontalSlider title="Upcoming" movies={upcomingMovies}/>
+			<HorizontalSlider title="Popular" movies={movies.popular}/>
+			<HorizontalSlider title="Top" movies={movies.topRated}/>
+			<HorizontalSlider title="Upcoming" movies={movies.upcoming}/>
 		</ScrollView>
 	)
 }

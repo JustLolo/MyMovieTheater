@@ -3,12 +3,14 @@
 //   import { Convert, MovieDBNowPlaying } from "./file";
 //
 //   const movieDBNowPlaying = Convert.toMovieDBNowPlaying(json);
-export const enum Endpoints {
+export enum Endpoints {
     now_playing = "/now_playing",
     popular = "/popular",
     top_rated = "/top_rated",
     upcoming = "/upcoming",
-}
+};
+
+typeof Endpoints;
 
 export interface MovieDBMoviesResponse {
     dates?:         Dates;

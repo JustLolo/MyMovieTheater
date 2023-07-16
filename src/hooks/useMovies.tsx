@@ -2,47 +2,53 @@ import { useEffect, useState } from "react"
 import movieDB from '../api/movieDB';
 import { Movie, MovieDBMoviesResponse, Endpoints } from '../interfaces/movieInterface';
 
+interface MoviesState {
+	nowPlaying: Movie[],
+	popular: Movie[],
+	topRated: Movie[],
+	upcoming: Movie[],
+}
 
 export const useMovies = () => {
 
 	const [ isLoading, setIsLoading ] = useState(true)
-	const [ moviesNowPlaying, setMoviesNowPlaying ] = useState<Movie[]>([])
-	const [ moviesPopular, setMoviesPopular ] = useState<Movie[]>([])
-	const [ moviesTopRated, setMoviesTopRated ] = useState<Movie[]>([])
-	const [ moviesUpcoming, setMoviesUpcoming ] = useState<Movie[]>([])
+	const [moviesState, setMovieState] = useState<MoviesState>({
+		nowPlaying: [],
+		popular: [],
+		topRated: [],
+		upcoming: [],
+	});
 
 	useEffect(() => {
 		(async () =>{
 			// TODO: check potential race condition in the future
-			// const moviesNowPlaying = getMovies(Endpoints.now_playing);
-			// const moviesPopular = getMovies(Endpoints.popular);
 			const [
-				moviesNowPlaying,
-				moviesPopular,
-				moviesTopRated,
-				moviesUpcoming,
+				nowPlaying,
+				popular,
+				topRated,
+				upcoming,
 			] = await Promise.all([
 				getMovies(Endpoints.now_playing),
 				getMovies(Endpoints.popular),
 				getMovies(Endpoints.top_rated),
 				getMovies(Endpoints.upcoming),
-			])
+			]);
 
-			setMoviesNowPlaying(() => moviesNowPlaying );
-			setMoviesPopular(() => moviesPopular );
-			setMoviesTopRated(() => moviesTopRated );
-			setMoviesUpcoming(() => moviesUpcoming );
+			// TODO: Refactor this even more, use typeof and keyof to simplify this whole repetition
+			setMovieState({
+				nowPlaying,
+				popular,
+				topRated,
+				upcoming,
+			})
+			setIsLoading( false )
 
-			setIsLoading( () => false )
 		}) ();
 	}, [])
 
 	return ({
 		isLoading,
-		moviesInCinema: moviesNowPlaying,
-		popularMovies: moviesPopular,
-		topRatedMovies: moviesTopRated,
-		upcomingMovies: moviesUpcoming,
+		movies: moviesState,
 	})
 }
 
