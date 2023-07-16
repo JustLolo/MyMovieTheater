@@ -1,5 +1,5 @@
 import { StackScreenProps } from "@react-navigation/stack"
-import { ActivityIndicator, Button, Dimensions, Text, View, FlatList, StyleSheet, ScrollView } from "react-native"
+import { ActivityIndicator, Dimensions, View, ScrollView } from "react-native"
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -7,7 +7,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { RootStackParamList } from "../navigation/Navigation"
 import { useMovies } from "../hooks/useMovies"
 import { MoviePoster } from "../components/MoviePoster"
-import { Movie } from "../interfaces/movieInterface";
 import { HorizontalSlider } from "../components/HorizontalSlider";
 
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
