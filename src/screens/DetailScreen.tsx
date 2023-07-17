@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { RootStackParamList } from "../navigation/Navigation"
 import { useMoviesDetails } from "../hooks/useMoviesDetails";
+import { MovieDetails } from "../components/MovieDetails";
+import { MovieFull } from "../interfaces/movieInterface";
 
 interface Props extends StackScreenProps<RootStackParamList, 'DetailScreen'> {};
 let screen = Dimensions.get('screen')
@@ -13,10 +15,6 @@ export const DetailScreen = ({ route } : Props) => {
 	const {isLoading, movieFull, cast} = useMoviesDetails(movie.id)
 
 	console.log({isLoading});
-	
-	if (isLoading) {
-		return <ActivityIndicator />
-	}
 	
 	const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 	// console.log(movie.title)
@@ -36,6 +34,13 @@ export const DetailScreen = ({ route } : Props) => {
 				<Text style={ styles.title }>{ movie.title }</Text>
 			</View>
 
+				{
+					isLoading 
+						? <ActivityIndicator size={'small'} /> 
+						// don't like this not-null assertion operator (!), try to get rid of it
+						: <MovieDetails movieFull={movieFull!} cast={cast}/>
+				}
+
 			<View style={styles.marginContainer}>
 				<Icon 
 					name="star-outline" 
@@ -53,7 +58,7 @@ const styles = StyleSheet.create({
 		height: (screen.height * 0.7),
 
 		overflow: 'hidden',
-		marginBottom: 25,
+		marginBottom: 1,
 
 		shadowColor: '#000',
 		// shadowColor: 'red',
