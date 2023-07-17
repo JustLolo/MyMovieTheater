@@ -91,29 +91,3 @@ export enum OriginalLanguage {
     En = "en",
     Fi = "fi",
 }
-// Converts JSON strings to/from your types
-export class Convert {
-    public static toMovieDB(json: string): MovieDBMoviesResponse {
-        return JSON.parse(json);
-    }
-
-    public static movieDBToJson(value: MovieDBMoviesResponse): string {
-        return JSON.stringify(value);
-    }
-
-    public static toMovie(json: string): Movie {
-        return JSON.parse(json);
-    }
-
-    public static movieToJson(value: Movie): string {
-        return JSON.stringify(value);
-    }
-
-    public static toMovieDetails(json: string): MovieFull {
-        return JSON.parse(json);
-    }
-
-    public static movieDetailsToJson(value: MovieFull): string {
-        return JSON.stringify(value);
-    }
-}

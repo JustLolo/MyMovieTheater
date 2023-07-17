@@ -1,19 +1,26 @@
-import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native"
+import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { RootStackParamList } from "../navigation/Navigation"
-
 import Icon from 'react-native-vector-icons/Ionicons';
 
-interface Props extends StackScreenProps<RootStackParamList, 'DetailScreen'> {};
+import { RootStackParamList } from "../navigation/Navigation"
+import { useMoviesDetails } from "../hooks/useMoviesDetails";
 
+interface Props extends StackScreenProps<RootStackParamList, 'DetailScreen'> {};
 let screen = Dimensions.get('screen')
 
 export const DetailScreen = ({ route } : Props) => {
-
 	const movie = route.params.movie;
+	const {isLoading, movieFull, cast} = useMoviesDetails(movie.id)
+
+	console.log({isLoading});
+	
+	if (isLoading) {
+		return <ActivityIndicator />
+	}
+	
 	const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-	console.log(movie.title)
-	console.log(movie.id)
+	// console.log(movie.title)
+	// console.log(movie.id)
 
 	return (
 		<ScrollView>

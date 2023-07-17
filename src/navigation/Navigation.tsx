@@ -1,7 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../screens/HomeScreen';
 import { DetailScreen } from '../screens/DetailScreen';
-import { Convert, Movie } from '../interfaces/movieInterface';
+import { Movie } from '../interfaces/movieInterface';
+import { Convert } from '../api/movieDB';
 
 export type RootStackParamList = {
   // Screen: {params: value} | undefined (if you aren't passing anything)
@@ -9,9 +10,7 @@ export type RootStackParamList = {
   DetailScreen: { movie: Movie },
 };
 
-
 const Stack = createStackNavigator<RootStackParamList>();
-
 
 export function Navigation() {
   return (
