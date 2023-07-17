@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../screens/HomeScreen';
 import { DetailScreen } from '../screens/DetailScreen';
-import { Convert, Movie, OriginalLanguage } from '../interfaces/movieInterface';
+import { Convert, Movie } from '../interfaces/movieInterface';
 
 export type RootStackParamList = {
   // Screen: {params: value} | undefined (if you aren't passing anything)
@@ -23,9 +23,9 @@ export function Navigation() {
         }
       }}
     >
-      {/* <Stack.Screen name="DetailScreen" component={DetailScreen} /> */}
       <Stack.Screen name="DetailScreen" component={DetailScreen} initialParams={{ movie: initMovie }}/>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      {/* <Stack.Screen name="DetailScreen" component={DetailScreen} /> */}
     </Stack.Navigator>
   );
 }

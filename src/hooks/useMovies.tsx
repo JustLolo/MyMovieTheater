@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import movieDB from '../api/movieDB';
-import { Movie, MovieDBMoviesResponse, Endpoints } from '../interfaces/movieInterface';
+import { getMovies } from '../api/movieDB';
+import { Movie } from '../interfaces/movieInterface';
 
 interface MoviesState {
 	nowPlaying: Movie[],
@@ -28,10 +28,11 @@ export const useMovies = () => {
 				topRated,
 				upcoming,
 			] = await Promise.all([
-				getMovies(Endpoints.now_playing),
-				getMovies(Endpoints.popular),
-				getMovies(Endpoints.top_rated),
-				getMovies(Endpoints.upcoming),
+				// TODO: check potential antipattern
+				getMovies('/now_playing'),
+				getMovies('/popular'),
+				getMovies('/top_rated'),
+				getMovies('/upcoming'),
 			]);
 
 			// TODO: Refactor this even more, use typeof and keyof to simplify this whole repetition
@@ -50,12 +51,4 @@ export const useMovies = () => {
 		isLoading,
 		movies: moviesState,
 	})
-}
-
-async function getMovies(endpoint: Endpoints ) {
-	let movies : Movie[] = [];
-	// TODO: handle errors
-	const resp = await movieDB.get<MovieDBMoviesResponse>(endpoint)
-	movies = resp.data.results;
-	return movies
 }

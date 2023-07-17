@@ -13,6 +13,7 @@ export const DetailScreen = ({ route } : Props) => {
 	const movie = route.params.movie;
 	const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 	console.log(movie.title)
+	console.log(movie.id)
 
 	return (
 		<ScrollView>
