@@ -1,7 +1,7 @@
-import { Text, View } from "react-native"
+import { Text, View, FlatList } from "react-native"
 import Icon from 'react-native-vector-icons/Ionicons';
 import { MovieFull } from '../interfaces/movieInterface';
-import { Cast } from "../interfaces/creditsInterface";
+import { Cast } from '../interfaces/creditsInterface';
 import { CastItem } from './CastItem';
 
 interface Props {
@@ -51,22 +51,36 @@ export const MovieDetails = ({ movieFull , cast}: Props) => {
 			</View>
 			<View style={{
 				paddingBottom: 8,
-				marginHorizontal: 20,
-				backgroundColor: 'white',
+				// marginHorizontal: 20,
+
+				// backgroundColor: 'white',
 				// borderWidth: 1,
 			}}>
 				<Text style={{ 
 					color: 'black',
 					fontSize: 23,
 					fontWeight: 'bold',
+					
+					// create a global variable for the margin
+					marginHorizontal: 20,
 					// borderColor: 'red',
 					// borderWidth: 1,
 					zIndex: 1,
-					backgroundColor: 'white'
+					// backgroundColor: 'white'
 				}}>
 					Actores
 				</Text>
-				<CastItem actor={cast[0]}/>
+				<FlatList
+					horizontal
+					data={cast}
+					keyExtractor={ (actor) => actor.id.toString() }
+					renderItem={ ({ item }) => <CastItem actor={item}/>}
+					style={{
+						marginTop: 10,
+						// height: 50
+					}}
+				/>
+				{/* <CastItem actor={cast[0]}/> */}
 			</View>
 		</>
 
