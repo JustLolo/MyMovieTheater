@@ -1,7 +1,7 @@
 import { Text, View } from "react-native"
+import Icon from 'react-native-vector-icons/Ionicons';
 import { MovieFull } from '../interfaces/movieInterface';
 import { Cast } from "../interfaces/creditsInterface";
-import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props {
 	movieFull: MovieFull;
@@ -43,7 +43,7 @@ export const MovieDetails = ({ movieFull , cast}: Props) => {
 			</Text>
 
 			<Text style={{ color: 'black', marginBottom: 8 }}>
-				{ movieFull.budget }
+				{ Intl.NumberFormat('en-EN', { style: 'currency', currency: 'USD' }).format(movieFull.budget) }
 			</Text>
 
 
