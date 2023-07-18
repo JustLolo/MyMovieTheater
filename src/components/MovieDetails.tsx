@@ -2,6 +2,7 @@ import { Text, View } from "react-native"
 import Icon from 'react-native-vector-icons/Ionicons';
 import { MovieFull } from '../interfaces/movieInterface';
 import { Cast } from "../interfaces/creditsInterface";
+import { CastItem } from './CastItem';
 
 interface Props {
 	movieFull: MovieFull;
@@ -12,41 +13,62 @@ export const MovieDetails = ({ movieFull , cast}: Props) => {
 	// console.log(movieFull);
 
 	return (
-		<View style={{ marginHorizontal: 20 }}>
-			{/* <Text style={{color: 'black'}}> {movieFull.release_date.toString()} </Text> */}
+		<>
+		
+			<View style={{ marginHorizontal: 20, marginBottom: 8 }}>
+				{/* <Text style={{color: 'black'}}> {movieFull.release_date.toString()} </Text> */}
 
-			{/* Details */}
-			<View style={{ flexDirection: 'row', marginBottom: 8 }}>
-				<View style={{ top: 2 }}> 
-					<Icon
-						name="star-outline" 
-						color="grey"
-						size={16}
-					/> 
+				{/* Details */}
+				<View style={{ flexDirection: 'row', marginBottom: 8 }}>
+					<View style={{ top: 2 }}> 
+						<Icon
+							name="star-outline" 
+							color="grey"
+							size={16}
+						/> 
+					</View>
+					<Text style={{ color: 'black' }}> { movieFull.vote_average}</Text>
+					<Text style={{ color: 'black', marginLeft: 5}}> -  {movieFull.genres.map(g => g.name).join(', ')}</Text>
 				</View>
-				<Text style={{ color: 'black' }}> { movieFull.vote_average}</Text>
-				<Text style={{ color: 'black', marginLeft: 5}}> -  {movieFull.genres.map(g => g.name).join(', ')}</Text>
+
+				{/* Overview */}
+				<Text style={{ color: 'black', fontSize: 23, fontWeight: 'bold' }}>
+					Overview
+				</Text>
+
+				<Text style={{ color: 'black', marginBottom: 8 }}>
+					{ movieFull.overview }
+				</Text>
+
+				{/* Budget */}
+				<Text style={{ color: 'black', fontSize: 23, fontWeight: 'bold' }}>
+					Budget
+				</Text>
+
+				<Text style={{ color: 'black' }}>
+					{ Intl.NumberFormat('en-EN', { style: 'currency', currency: 'USD' }).format(movieFull.budget) }
+				</Text>
 			</View>
+			<View style={{
+				paddingBottom: 8,
+				marginHorizontal: 20,
+				backgroundColor: 'white',
+				// borderWidth: 1,
+			}}>
+				<Text style={{ 
+					color: 'black',
+					fontSize: 23,
+					fontWeight: 'bold',
+					// borderColor: 'red',
+					// borderWidth: 1,
+					zIndex: 1,
+					backgroundColor: 'white'
+				}}>
+					Actores
+				</Text>
+				<CastItem actor={cast[0]}/>
+			</View>
+		</>
 
-			{/* Overview */}
-			<Text style={{ color: 'black', fontSize: 23, fontWeight: 'bold' }}>
-				Overview
-			</Text>
-
-			<Text style={{ color: 'black', marginBottom: 8 }}>
-				{ movieFull.overview }
-			</Text>
-
-			{/* Budget */}
-			<Text style={{ color: 'black', fontSize: 23, fontWeight: 'bold' }}>
-				Budget
-			</Text>
-
-			<Text style={{ color: 'black', marginBottom: 8 }}>
-				{ Intl.NumberFormat('en-EN', { style: 'currency', currency: 'USD' }).format(movieFull.budget) }
-			</Text>
-
-
-		</View>
 	)
 }
