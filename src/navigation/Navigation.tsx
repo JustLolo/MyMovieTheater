@@ -22,9 +22,9 @@ export function Navigation() {
         }
       }}
     >
-      <Stack.Screen name="DetailScreen" component={DetailScreen} initialParams={{ movie: initMovie }}/>
+      {/* <Stack.Screen name="DetailScreen" component={DetailScreen} initialParams={{ movie: initMovie }}/> */}
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      {/* <Stack.Screen name="DetailScreen" component={DetailScreen} /> */}
+      <Stack.Screen name="DetailScreen" component={DetailScreen} />
     </Stack.Navigator>
   );
 }

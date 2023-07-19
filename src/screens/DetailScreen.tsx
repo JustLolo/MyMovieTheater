@@ -1,18 +1,21 @@
 import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { RootStackParamList } from "../navigation/Navigation"
 import { useMoviesDetails } from "../hooks/useMoviesDetails";
 import { MovieDetails } from "../components/MovieDetails";
-import { MovieFull } from "../interfaces/movieInterface";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface Props extends StackScreenProps<RootStackParamList, 'DetailScreen'> {};
 let screen = Dimensions.get('screen')
 
-export const DetailScreen = ({ route } : Props) => {
+export const DetailScreen = ({ route, navigation } : Props) => {
 	const movie = route.params.movie;
-	const {isLoading, movieFull, cast} = useMoviesDetails(movie.id)
+	const {isLoading, movieFull, cast} = useMoviesDetails(movie.id);
+
+	const insets = useSafeAreaInsets();
 
 	console.log({isLoading});
 	
@@ -41,12 +44,21 @@ export const DetailScreen = ({ route } : Props) => {
 						: <MovieDetails movieFull={movieFull!} cast={cast}/>
 				}
 
-			<View style={styles.marginContainer}>
-				<Icon 
-					name="star-outline" 
-					color="grey"
-					size={20}
-				/>
+			{/* going back button */}
+			{/* TODO: Style this thing,make it look better that arrow */}
+			<View style={{
+					position: "absolute",
+					paddingTop: insets.top + 2,
+				}}>
+				<TouchableOpacity
+					onPress={() => navigation.pop()}
+				>
+					<Icon
+						name="arrow-back-outline" 
+						color="gray"
+						size={60}
+					/>
+				</TouchableOpacity>
 			</View>
 		</ScrollView>
 	)
@@ -93,6 +105,6 @@ const styles = StyleSheet.create({
 		color: 'black',
 		fontSize: 20,
 		fontWeight: "bold",
-	}
+	},
 })
 
