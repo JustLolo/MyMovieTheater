@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Movie, MovieDBMoviesResponse, MovieFull } from '../interfaces/movieInterface';
+import { Movie, MovieDBResponse, MovieFull } from '../interfaces/movieInterface';
 import { CreditsResponse } from '../interfaces/creditsInterface';
 
 const movieDB = axios.create({
@@ -20,7 +20,7 @@ const movieDB = axios.create({
 export async function getMovies(endpoint: GenericEndpoints ) {
 	let movies : Movie[] = [];
 	// TODO: handle errors
-	const resp = await movieDB.get<MovieDBMoviesResponse>(pathBuilder(endpoint))
+	const resp = await movieDB.get<MovieDBResponse>(pathBuilder(endpoint))
 	movies = resp.data.results;
 	return movies
 }
@@ -69,11 +69,11 @@ export function pathBuilder <T extends GenericEndpoints | IdEndpoints> (endpoint
 
 export class Convert {
 	// TODO: `improve` this validation/covertion
-    public static toMovieDB(json: string): MovieDBMoviesResponse {
+    public static toMovieDB(json: string): MovieDBResponse {
         return JSON.parse(json);
     }
 
-    public static movieDBToJson(value: MovieDBMoviesResponse): string {
+    public static movieDBToJson(value: MovieDBResponse): string {
         return JSON.stringify(value);
     }
 

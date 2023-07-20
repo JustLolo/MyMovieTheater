@@ -1,8 +1,18 @@
 API documentation: https://developer.themoviedb.org/
 
+Remove/Find that warning/error I am getting (I know i shouldn't)
+grep -nr 'ViewPropTypes will be removed from' ./node_modules/react-native --include=\*.js 
+
+grep -nr 'ViewPropTypes will be removed from' . --include=\*.js
+
+
 IMPORTANT TODO:
 [ ] Remove Api keys
 [ ] check TODOS around the codebase
+
+
+
+
 
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 

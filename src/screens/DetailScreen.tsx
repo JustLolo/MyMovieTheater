@@ -19,6 +19,7 @@ export const DetailScreen = ({ route, navigation } : Props) => {
 
 	console.log({isLoading});
 	
+	// TODO: centralize this 
 	const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 	// console.log(movie.title)
 	// console.log(movie.id)
