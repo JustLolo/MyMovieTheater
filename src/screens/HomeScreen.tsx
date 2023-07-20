@@ -2,13 +2,14 @@ import { StackScreenProps } from "@react-navigation/stack"
 import { ActivityIndicator, Dimensions, View, ScrollView } from "react-native"
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-// import { getColors } from 'react-native-image-colors'
+import ImageColors from 'react-native-image-colors'
 
 import { RootStackParamList } from "../navigation/Navigation"
 import { useMovies } from "../hooks/useMovies"
 import { MoviePoster } from "../components/MoviePoster"
 import { HorizontalSlider } from "../components/HorizontalSlider";
 import { GradientBackground } from "../components/GradientBackground";
+import { getImageColors } from "../helpers/getColores";
 
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
 
@@ -23,9 +24,10 @@ export const HomeScreen = ({navigation}: Props) => {
 		const movie = movies.nowPlaying[index];
 		const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
+		const [ primary, secundary ] = await getImageColors( uri );
 
-
-		// const colors = await getColors(uri, {})
+		console.log({ primary, secundary })
+		// const colors = await ImageColors.getColors(uri, {})
 		// console.log({colors})
 		// console.log(movie.title, uri)
 	}
