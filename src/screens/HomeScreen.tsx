@@ -3,6 +3,7 @@ import { ActivityIndicator, Dimensions, View, ScrollView } from "react-native"
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import ImageColors from 'react-native-image-colors'
+import { useContext } from "react";
 
 import { RootStackParamList } from "../navigation/Navigation"
 import { useMovies } from "../hooks/useMovies"
@@ -10,6 +11,7 @@ import { MoviePoster } from "../components/MoviePoster"
 import { HorizontalSlider } from "../components/HorizontalSlider";
 import { GradientBackground } from "../components/GradientBackground";
 import { getImageColors } from "../helpers/getColores";
+import { ContextProps, GradientContext } from "../context/GradientContext";
 
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
 
@@ -19,17 +21,17 @@ export const HomeScreen = ({navigation}: Props) => {
 
 	const { isLoading, movies } = useMovies();
 	const { top } = useSafeAreaInsets();
+	const {colors, prevColors, setMainColors, setPrevMainColors}  = useContext(GradientContext)!;
 
 	const getPosterColors = async ( index: number) => {
 		const movie = movies.nowPlaying[index];
 		const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
-		const [ primary, secundary ] = await getImageColors( uri );
+		const [ primary, secondary ] = await getImageColors( uri );
 
-		console.log({ primary, secundary })
-		// const colors = await ImageColors.getColors(uri, {})
-		// console.log({colors})
-		// console.log(movie.title, uri)
+		setMainColors({ primary, secondary });
+
+		console.log({ primary, secondary })
 	}
 
 
