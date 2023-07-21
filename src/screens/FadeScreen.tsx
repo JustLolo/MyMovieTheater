@@ -23,14 +23,14 @@ export const FadeScreen = () => {
 
 			<Button
 				title="FadeIn"
-				onPress={ fade.fadeIn }
+				onPress={ () => fade.fadeIn() }
 			/>
 
 			<View style={{ marginBottom: 30 }}/>
 
 			<Button
 				title="FadeOut"
-				onPress={ fade.fadeOut }
+				onPress={ () => fade.fadeOut() }
 			/>
 		</View>
 	)
