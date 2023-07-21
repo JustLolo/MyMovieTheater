@@ -21,7 +21,7 @@ export const HomeScreen = ({navigation}: Props) => {
 
 	const { isLoading, movies } = useMovies();
 	const { top } = useSafeAreaInsets();
-	const {colors, prevColors, setMainColors, setPrevMainColors}  = useContext(GradientContext)!;
+	const { setMainColors }  = useContext(GradientContext)!;
 
 	const setPosterColors = async ( index: number) => {
 		const movie = movies.nowPlaying[index];

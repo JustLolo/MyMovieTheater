@@ -2,6 +2,9 @@ API documentation: https://developer.themoviedb.org/
 
 Remove/Find that warning/error I am getting (I know i shouldn't)
 grep -nr 'ViewPropTypes will be removed from' ./node_modules/react-native --include=\*.js 
+OR
+Open `Warning searcher.code-search` on VSCODE
+
 
 grep -nr 'ViewPropTypes will be removed from' . --include=\*.js
 
