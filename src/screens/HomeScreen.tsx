@@ -3,7 +3,7 @@ import { ActivityIndicator, Dimensions, View, ScrollView } from "react-native"
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import ImageColors from 'react-native-image-colors'
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { RootStackParamList } from "../navigation/Navigation"
 import { useMovies } from "../hooks/useMovies"
@@ -23,7 +23,7 @@ export const HomeScreen = ({navigation}: Props) => {
 	const { top } = useSafeAreaInsets();
 	const {colors, prevColors, setMainColors, setPrevMainColors}  = useContext(GradientContext)!;
 
-	const getPosterColors = async ( index: number) => {
+	const setPosterColors = async ( index: number) => {
 		const movie = movies.nowPlaying[index];
 		const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
 
@@ -33,6 +33,13 @@ export const HomeScreen = ({navigation}: Props) => {
 
 		console.log({ primary, secondary })
 	}
+
+	useEffect(() => {
+		if ( movies.nowPlaying.length > 0 ) {
+			setPosterColors(0)
+		}
+	}, [movies.nowPlaying])
+	
 
 
 	if (isLoading) {
@@ -57,7 +64,7 @@ export const HomeScreen = ({navigation}: Props) => {
 						sliderWidth={ windowWidth }
 						itemWidth={ 300 }
 						inactiveSlideOpacity={0.9}
-						onSnapToItem={ index => getPosterColors( index )}
+						onSnapToItem={ index => setPosterColors( index )}
 					/>
 				</View>
 				
