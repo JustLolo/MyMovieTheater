@@ -1,3 +1,21 @@
+### How 'It works in my computer'
+```
+Windows 10
+
+nvm installed using Chocolatey
+chocolatey -v
+1.1.0
+
+$ nvm -v
+1.1.10
+
+$ node -v
+v18.16.0
+
+$ yarn -v
+1.22.19
+```
+
 API documentation: https://developer.themoviedb.org/
 
 Remove/Find that warning/error I am getting (I know i shouldn't)
@@ -7,6 +25,16 @@ Open `Warning searcher.code-search` on VSCODE
 
 
 grep -nr 'ViewPropTypes will be removed from' . --include=\*.js
+
+This this is using cloudflare workers
+you need to login using: `npx wrangler login`
+
+why a 'backend' service for this?
+No matter how, there is no way I can 'encript' a key/token in the final android/ios bundle.
+Some easy reverse engineer and someone would get the key/token.
+
+So I need a backend to act as a wrapper of the movie api.
+This will have the acces to the key/token and will serve the required information from the endpoint.
 
 
 IMPORTANT TODO:
