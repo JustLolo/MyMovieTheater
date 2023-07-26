@@ -53,7 +53,7 @@ export function pathBuilder <T extends GenericEndpoints | IdEndpoints> (endpoint
 	return path;
 }
 
-// This solution looks 'smarter', but it's extremelly read if you don't know a lot about generics
+// This solution looks 'smarter', but it's extremelly hard to read if you don't know a lot about generics
 // function pathBuilder 
 // <T extends GenericEndpoints | IdEndpoints> (
 // 	endpoint: T, 
