@@ -1,8 +1,7 @@
-### How 'It works in my computer'
+# How 'It works in my computer'
+* OS: Windows 10
+* nvm: installed using Chocolatey
 ```
-Windows 10
-
-nvm installed using Chocolatey
 chocolatey -v
 1.1.0
 
@@ -16,32 +15,35 @@ $ yarn -v
 1.22.19
 ```
 
-API documentation: https://developer.themoviedb.org/
+**API** documentation: https://developer.themoviedb.org/
 
-Remove/Find that warning/error I am getting (I know i shouldn't)
+# Getting Started
+
+>**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+
+
+# TODO List
+- [ ] Remove Api keys
+- [ ] check TODOS around the codebase
+- [ ] Remove/Find that warning/error I am getting (I know i shouldn't)
+```
 grep -nr 'ViewPropTypes will be removed from' ./node_modules/react-native --include=\*.js 
 OR
-Open `Warning searcher.code-search` on VSCODE
+Open `Warning searcher.code-search` file on VSCODE
+```
 
+# Backend
+* https://server.YOUR_ACCOUNT_HERE.workers.dev/
 
-grep -nr 'ViewPropTypes will be removed from' . --include=\*.js
+## why am I using a backend?
+* No matter how, there is no way I can 'encript' a key/token in the final android/ios bundle.
+* Some easy reverse engineer and someone would get the key/token.
 
-This this is using cloudflare workers
-you need to login using: `npx wrangler login`
-
-why a 'backend' service for this?
-No matter how, there is no way I can 'encript' a key/token in the final android/ios bundle.
-Some easy reverse engineer and someone would get the key/token.
+* This this is using cloudflare workers
+* you need to login using: `npx wrangler login`
 
 So I need a backend to act as a wrapper of the movie api.
 This will have the acces to the key/token and will serve the required information from the endpoint.
-
-
-IMPORTANT TODO:
-[ ] Remove Api keys
-[ ] check TODOS around the codebase
-
-
 
 
 

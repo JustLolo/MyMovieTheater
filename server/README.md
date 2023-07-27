@@ -1,7 +1,10 @@
 # Followed this guide
 https://developers.cloudflare.com/workers/get-started/guide/
 
+
+
 # Deployment/Run
+Loggin into your account using: `yarn wrangler login`
 ## Dev
 ###
 
