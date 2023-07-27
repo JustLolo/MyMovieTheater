@@ -2,6 +2,15 @@ name = "server"
 main = "src/worker.ts"
 compatibility_date = "2023-07-17"
 
+# Default environment
+workers_dev = true
+vars = { ENVIRONMENT = "dev" }
+
+[env.prod]
+vars = { ENVIRONMENT = "prod" }
+
+
+
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.
 # Docs: https://developers.cloudflare.com/workers/platform/environment-variables

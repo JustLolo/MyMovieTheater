@@ -24,12 +24,14 @@ export interface Env {
 	//
 	// Example binding to a Queue. Learn more at https://developers.cloudflare.com/queues/javascript-apis/
 	// MY_QUEUE: Queue;
+	// MOVIE_API: 'https://api.themoviedb.org/3/movie'
+	MOVIE_TOKEN: string,
 }
 
 
 
-const handler: ExportedHandler = {
-	async fetch(request) {
+const handler: ExportedHandler<Env> = {
+	async fetch(request, env) {
 		const newRequestInit = {
 			// Change method
 			method: "GET",
@@ -37,9 +39,12 @@ const handler: ExportedHandler = {
 			headers: {
 				"Content-Type": "application/json",
 				// TODO: get rid fo this AND reset token before pushing
-				'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YmUwOTliNDI5MDVhZjQ0Mzk3MGVjMjM2N2I5NzI5MiIsInN1YiI6IjY0YjA4OGYyZDIzNmU2MDEzOWIyZWM2YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-iLnV5VxGB08ouqfH9h-OnkR8j8BO00tbSLMIhZkfzI'
+				'Authorization': `Bearer ${env.MOVIE_TOKEN}`
 			},
 		};
+
+
+		console.log(env.MOVIE_TOKEN)
 
 		const baseURL = "https://api.themoviedb.org/3/movie";
 		const workerURL = new URL(request.url);
@@ -53,7 +58,7 @@ const handler: ExportedHandler = {
 		// Best practice is to always use the original request to construct the new request
 		// to clone all the attributes. Applying the URL also requires a constructor
 		// since once a Request has been constructed, its URL is immutable.
-		const newRequest = new Request(
+		const newRequest: Request = new Request(
 			baseEndpointURL.toString(),
 			new Request(request, newRequestInit)
 		);
@@ -62,14 +67,16 @@ const handler: ExportedHandler = {
 		// let headersObject = Object.fromEntries(request.headers);
 		// let requestHeaders = JSON.stringify(headersObject, null, 2);
 		// console.log(`Request headers: ${requestHeaders}`);
+		
+		// console.log(process.env)
 
 		try {
 			// TODO: Type complaining here
-			return await fetch(newRequest);
+			return await fetch(newRequest as RequestInfo);
 		} catch (e) {
 
 			// TODO: Type complaining here
-			return new Response(JSON.stringify({ error: e.message }), {
+			return new Response(JSON.stringify({ error: (e as Error).message }), {
 			status: 500,
 			});
 		}
