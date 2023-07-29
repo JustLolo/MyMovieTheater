@@ -35,7 +35,6 @@ $ yarn -v
 
 
 # TODO List
-- [ ] Remove/reset Api keys
 - [ ] Add environment variables explanation (order) to the readme
 - [ ] check TODOS around the codebase
 - [ ] Remove/Find that warning/error I am getting (I know i shouldn't)

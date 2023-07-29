@@ -38,7 +38,6 @@ const handler: ExportedHandler<Env> = {
 			redirect: "follow",
 			headers: {
 				"Content-Type": "application/json",
-				// TODO: get rid fo this AND reset token before pushing
 				'Authorization': `Bearer ${env.MOVIE_TOKEN}`
 			},
 		};
@@ -71,13 +70,10 @@ const handler: ExportedHandler<Env> = {
 		// console.log(process.env)
 
 		try {
-			// TODO: Type complaining here
 			return await fetch(newRequest as RequestInfo);
 		} catch (e) {
-
-			// TODO: Type complaining here
 			return new Response(JSON.stringify({ error: (e as Error).message }), {
-			status: 500,
+				status: 500,
 			});
 		}
 	},

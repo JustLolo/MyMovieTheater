@@ -11,7 +11,6 @@ const movieDB = axios.create({
 		language: 'en-US'
 	},
 	headers: { 
-		// TODO: Reset this API key before pushing to github
 		'Origin': 'https://developer.themoviedb.org', 
 		'Authorization': `Bearer ${API_TOKEN}`
 	}
