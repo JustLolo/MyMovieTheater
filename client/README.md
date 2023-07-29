@@ -1,13 +1,14 @@
 # How 'It works in my computer'
-* OS: Windows 10
-* nvm: installed using Chocolatey
-```
+```bash
+# OS: Windows 10
 chocolatey -v
 1.1.0
 
+# nvm: installed using Chocolatey
 $ nvm -v
 1.1.10
 
+# node: using nvm
 $ node -v
 v18.16.0
 
@@ -23,7 +24,8 @@ $ yarn -v
 
 
 # TODO List
-- [ ] Remove Api keys
+- [ ] Remove/reset Api keys
+- [ ] Add environment explanation (order) to the readme
 - [ ] check TODOS around the codebase
 - [ ] Remove/Find that warning/error I am getting (I know i shouldn't)
 ```
@@ -33,17 +35,18 @@ Open `Warning searcher.code-search` file on VSCODE
 ```
 
 # Backend
+### Running on a cloudflare worker
+You can create your account [here](https://dash.cloudflare.com/sign-up)
 * https://server.YOUR_ACCOUNT_HERE.workers.dev/
 
-## why am I using a backend?
+### Why am I using a backend?
 * No matter how, there is no way I can 'encript' a key/token in the final android/ios bundle.
 * Some easy reverse engineer and someone would get the key/token.
-
 * This this is using cloudflare workers
-* you need to login using: `npx wrangler login`
+* you need to login first using: `npx wrangler login`
 
 So I need a backend to act as a wrapper of the movie api.
-This will have the acces to the key/token and will serve the required information from the endpoint.
+This backend will have the acces to the API key/token and will serve the required information from the movie endpoint.
 
 
 
@@ -60,10 +63,6 @@ First, you will need to start **Metro**, the JavaScript _bundler_ that ships _wi
 To start Metro, run the following command from the _root_ of your React Native project:
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
 yarn start
 ```
 
@@ -74,20 +73,12 @@ Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _roo
 ### For Android
 
 ```bash
-# using npm
-npm run android
-
-# OR using Yarn
 yarn android
 ```
 
 ### For iOS
 
 ```bash
-# using npm
-npm run ios
-
-# OR using Yarn
 yarn ios
 ```
 
@@ -104,18 +95,40 @@ Now that you have successfully run the app, let's modify it.
 
    For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
 ### Now what?
 
 - If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
 - If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
 
 # Troubleshooting
-
 If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+
+### Styles aren't updating properly
+```
+yarn start:reset-cache
+```
+
+### Clean reinstall
+```bash
+# Android
+cd android && \
+./gradlew clean && \
+rm -rf ./build && \
+rm -rf ./app/build && \
+rm -rf ./.gradle && \
+# iOS
+# pending :3
+
+# JS
+cd .. && \
+rm -rf ./node_modules && \
+yarn cache clean && \
+yarn install && \
+yarn start:reset-cache
+```
+
+
+
 
 # Learn More
 

@@ -1,23 +1,24 @@
 import axios from 'axios'
 import { Movie, MovieDBResponse, MovieFull } from '../interfaces/movieInterface';
 import { CreditsResponse } from '../interfaces/creditsInterface';
+import { API_BASE_URL, API_TOKEN } from '@env';
 
 const movieDB = axios.create({
-	baseURL: 'https://api.themoviedb.org/3/movie',
+	baseURL: API_BASE_URL,
 	method: 'get',
 	maxBodyLength: Infinity,
 	params: {
 		language: 'en-US'
 	},
 	headers: { 
-		// TODO: Create environment variables
-		// TODO: Reset this API key key before pushing to github
+		// TODO: Reset this API key before pushing to github
 		'Origin': 'https://developer.themoviedb.org', 
-		'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YmUwOTliNDI5MDVhZjQ0Mzk3MGVjMjM2N2I5NzI5MiIsInN1YiI6IjY0YjA4OGYyZDIzNmU2MDEzOWIyZWM2YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.-iLnV5VxGB08ouqfH9h-OnkR8j8BO00tbSLMIhZkfzI'
+		'Authorization': `Bearer ${API_TOKEN}`
 	}
 });
 
 export async function getMovies(endpoint: GenericEndpoints ) {
+	console.log(API_BASE_URL)
 	let movies : Movie[] = [];
 	// TODO: handle errors
 	const resp = await movieDB.get<MovieDBResponse>(pathBuilder(endpoint))

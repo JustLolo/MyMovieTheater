@@ -1,6 +1,11 @@
 # Query: ViewPropTypes will be
 # Flags: IgnoreExcludeSettings
-# Including: ./node_modules/react-native/*.js
+# Including: ./client/node_modules/react-native/*.js
 # ContextLines: 1
 
-No Results
+1 result - 1 file
+
+client\node_modules\react-native\index.js:
+  413      console.error(
+  414:       'ViewPropTypes will be removed from React Native, along with all ' +
+  415          'other PropTypes. We recommend that you migrate away from PropTypes ' +

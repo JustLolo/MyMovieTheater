@@ -12,6 +12,7 @@ import { HorizontalSlider } from "../components/HorizontalSlider";
 import { GradientBackground } from "../components/GradientBackground";
 import { getImageColors } from "../helpers/getColores";
 import { ContextProps, GradientContext } from "../context/GradientContext";
+import { API_BASE_URL } from '@env'
 
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
 
@@ -69,7 +70,8 @@ export const HomeScreen = ({navigation}: Props) => {
 				</View>
 				
 				{/* Popular movies */}
-				<HorizontalSlider title="Popular" movies={movies.popular}/>
+				<HorizontalSlider title={`${API_BASE_URL}`} movies={movies.popular}/>
+				{/* <HorizontalSlider title={`Popular`} movies={movies.popular}/> */}
 				<HorizontalSlider title="Top" movies={movies.topRated}/>
 				<HorizontalSlider title="Upcoming" movies={movies.upcoming}/>
 			</ScrollView>
