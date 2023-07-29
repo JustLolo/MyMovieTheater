@@ -1,8 +1,17 @@
+# Amovie
+
 # How 'It works in my computer'
+Why? Wasting hours trying to make something work is an issue for many people, so, I'm using this at this moment
 ```bash
 # OS: Windows 10
-chocolatey -v
+$ chocolatey -v
 1.1.0
+
+# java: installed using Chocolatey (or Android Studio, can't remember rn)
+$ java -version
+openjdk version "11.0.18" 2023-01-17 LTS
+OpenJDK Runtime Environment Microsoft-7208460 (build 11.0.18+10-LTS)
+OpenJDK 64-Bit Server VM Microsoft-7208460 (build 11.0.18+10-LTS, mixed mode)
 
 # nvm: installed using Chocolatey
 $ nvm -v
@@ -16,7 +25,9 @@ $ yarn -v
 1.22.19
 ```
 
-**API** documentation: https://developer.themoviedb.org/
+### **API** documentation: 
+* [General](https://developer.themoviedb.org/)
+* [Used in this project](https://developer.themoviedb.org/reference/movie-now-playing-list)
 
 # Getting Started
 
@@ -25,7 +36,7 @@ $ yarn -v
 
 # TODO List
 - [ ] Remove/reset Api keys
-- [ ] Add environment explanation (order) to the readme
+- [ ] Add environment variables explanation (order) to the readme
 - [ ] check TODOS around the codebase
 - [ ] Remove/Find that warning/error I am getting (I know i shouldn't)
 ```
@@ -36,7 +47,7 @@ Open `Warning searcher.code-search` file on VSCODE
 
 # Backend
 ### Running on a cloudflare worker
-You can create your account [here](https://dash.cloudflare.com/sign-up)
+You can create your account [here](https://dash.cloudflare.com/sign-up).
 * https://server.YOUR_ACCOUNT_HERE.workers.dev/
 
 ### Why am I using a backend?
