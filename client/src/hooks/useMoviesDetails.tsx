@@ -17,8 +17,6 @@ export const useMoviesDetails = (movieId: number) => {
 		cast: []
 	})
 
-	// TODO: remove this optional
-	// console.log(state.movieFull?.title)
 
 	useEffect(() => {
 		(async () => {

@@ -1,5 +1,7 @@
 import { Image, StyleSheet, Text, View } from "react-native"
 import { Cast } from "../interfaces/creditsInterface"
+import { useTheme } from "@react-navigation/native";
+import { invertRGBColor } from "../helpers/tools";
 
 interface Props {
 	actor: Cast,
@@ -9,9 +11,14 @@ export const CastItem = ({ actor }: Props) => {
 	// console.log(actor.name);
 	// TODO: check fro undefined actor.profile_path
 	const uri = `https://image.tmdb.org/t/p/w500/${actor.profile_path ?? ''}`
+	const theme = useTheme();
 
 	return (
-		<View style={ styles.container }>
+		<View style={{
+			...styles.container,
+			shadowColor: invertRGBColor(theme.colors.background),
+			backgroundColor: theme.colors.background
+			}}>
 			{ 
 				(actor.profile_path != undefined) && 
 				<Image
@@ -22,10 +29,10 @@ export const CastItem = ({ actor }: Props) => {
 			
 
 			<View style={ styles.actorInfo }>
-				<Text style={{ color: 'black', fontSize: 17, fontWeight: 'bold' }}>
+				<Text style={{ fontSize: 17, fontWeight: 'bold' }}>
 					{ actor.name }
 				</Text>
-				<Text style={{ color: 'black', fontSize: 15, opacity: 0.7 }}>{ actor.character }</Text>
+				<Text style={{ fontSize: 15, opacity: 0.7 }}>{ actor.character }</Text>
 			</View>
 		</View>
 	)
@@ -36,7 +43,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 
 		borderRadius: 10,
-		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
 			height: 10,
@@ -45,8 +51,7 @@ const styles = StyleSheet.create({
 		shadowRadius: 7,
 		top: 0,
 
-		elevation: 7,
-		backgroundColor: 'white',
+		elevation: 3,
 
 		paddingRight: 10,
 		paddingLeft: 1,

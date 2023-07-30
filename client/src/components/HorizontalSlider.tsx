@@ -17,8 +17,6 @@ export const HorizontalSlider = ({ title='', movies, cardsSeparation=9 }: Props)
 			{title !== '' 
 				&&
 				<Text style={{
- 					// TODO: search for every text color, had to do this bc my phone is using dark mode, so text is white and I can't see it
-					color: 'black',
 					fontSize: 30,
 					fontWeight: 'bold',
 					paddingLeft: 5,

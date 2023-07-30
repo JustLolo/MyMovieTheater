@@ -17,7 +17,6 @@ const movieDB = axios.create({
 });
 
 export async function getMovies(endpoint: GenericEndpoints ) {
-	console.log(API_BASE_URL)
 	let movies : Movie[] = [];
 	// TODO: handle errors
 	const resp = await movieDB.get<MovieDBResponse>(pathBuilder(endpoint))

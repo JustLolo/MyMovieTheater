@@ -31,13 +31,11 @@ export const HomeScreen = ({navigation}: Props) => {
 		const [ primary, secondary ] = await getImageColors( uri );
 
 		setMainColors({ primary, secondary });
-
-		console.log({ primary, secondary })
 	}
 
 	useEffect(() => {
 		if ( movies.nowPlaying.length > 0 ) {
-			setPosterColors(0)
+			setPosterColors(0);
 		}
 	}, [movies.nowPlaying])
 	
@@ -70,7 +68,7 @@ export const HomeScreen = ({navigation}: Props) => {
 				</View>
 				
 				{/* Popular movies */}
-				<HorizontalSlider title={`Popular`} movies={movies.popular}/>
+				<HorizontalSlider title="Popular" movies={movies.popular}/>
 				<HorizontalSlider title="Top" movies={movies.topRated}/>
 				<HorizontalSlider title="Upcoming" movies={movies.upcoming}/>
 			</ScrollView>

@@ -42,16 +42,12 @@ const handler: ExportedHandler<Env> = {
 			},
 		};
 
-
-		console.log(env.MOVIE_TOKEN)
-
 		const baseURL = "https://api.themoviedb.org/3/movie";
 		const workerURL = new URL(request.url);
 		const baseEndpointURL = new URL(baseURL);
 		
 		// TODO: check the requested endpoints against the ones located at client/src/api/movieDB.tsx
 		baseEndpointURL.pathname += workerURL.pathname;
-		// console.log("pathname: ", baseEndpointURL.pathname)
 
 
 		// Best practice is to always use the original request to construct the new request
@@ -67,7 +63,6 @@ const handler: ExportedHandler<Env> = {
 		// let requestHeaders = JSON.stringify(headersObject, null, 2);
 		// console.log(`Request headers: ${requestHeaders}`);
 		
-		// console.log(process.env)
 
 		try {
 			return await fetch(newRequest as RequestInfo);

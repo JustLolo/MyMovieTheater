@@ -1,4 +1,4 @@
-import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native"
+import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, View, useColorScheme } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,6 +7,8 @@ import { RootStackParamList } from "../navigation/Navigation"
 import { useMoviesDetails } from "../hooks/useMoviesDetails";
 import { MovieDetails } from "../components/MovieDetails";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { invertRGBColor } from "../helpers/tools";
+import { useTheme } from "@react-navigation/native";
 
 interface Props extends StackScreenProps<RootStackParamList, 'DetailScreen'> {};
 let screen = Dimensions.get('screen')
@@ -16,17 +18,17 @@ export const DetailScreen = ({ route, navigation } : Props) => {
 	const {isLoading, movieFull, cast} = useMoviesDetails(movie.id);
 
 	const insets = useSafeAreaInsets();
-
-	console.log({isLoading});
+	const theme = useTheme();
 	
 	// TODO: centralize this 
 	const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-	// console.log(movie.title)
-	// console.log(movie.id)
 
 	return (
 		<ScrollView>
-			<View style={styles.imageContainer}>
+			<View style={{
+				...styles.imageContainer,
+				shadowColor: invertRGBColor(theme.colors.background),
+			}}>
 				<Image 
 					source={{ uri }}
 					style={styles.posterImage}
@@ -56,7 +58,7 @@ export const DetailScreen = ({ route, navigation } : Props) => {
 				>
 					<Icon
 						name="arrow-back-outline" 
-						color="gray"
+						color={invertRGBColor(theme.colors.background)}
 						size={60}
 					/>
 				</TouchableOpacity>
@@ -73,8 +75,6 @@ const styles = StyleSheet.create({
 		overflow: 'hidden',
 		marginBottom: 1,
 
-		shadowColor: '#000',
-		// shadowColor: 'red',
 		shadowOffset: {
 			width: 0,
 			height: 10,
@@ -85,10 +85,6 @@ const styles = StyleSheet.create({
 		elevation: 9,
 		borderBottomEndRadius: 25,
 		borderBottomStartRadius: 25,
-
-
-		backgroundColor: 'red',
-		// borderRadius: 100,
 	},
 	posterImage: {
 		flex: 1,
@@ -98,12 +94,10 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 	},
 	subtitle: {
-		color: 'black',
 		fontSize: 16,
 		opacity: 0.8
 	},
 	title: {
-		color: 'black',
 		fontSize: 20,
 		fontWeight: "bold",
 	},

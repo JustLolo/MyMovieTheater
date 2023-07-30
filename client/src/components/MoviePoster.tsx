@@ -1,7 +1,8 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Movie } from "../interfaces/movieInterface"
-import { NavigationProp, useNavigation } from "@react-navigation/native"
+import { NavigationProp, useNavigation, useTheme } from "@react-navigation/native"
 import { RootStackParamList } from '../navigation/Navigation';
+import { invertRGBColor } from "../helpers/tools";
 
 interface Props {
 	movie: Movie
@@ -12,9 +13,10 @@ interface Props {
 export const MoviePoster = ({ movie, height=420, width=300 }: Props) => {
 	// Don't like to use this hook, but I also don't like to drill a prop through 3 components
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+	const theme = useTheme();
 
+	// centralize this
 	const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-	// console.log(`Rendered <MoviePoster />: ${uri}`)
 
 	return (
 		<TouchableOpacity
@@ -32,7 +34,10 @@ export const MoviePoster = ({ movie, height=420, width=300 }: Props) => {
 				// borderWidth: 1,
 			}
 		}>
-			<View style={styles.imageContainer}>
+			<View style={{
+				 ...styles.imageContainer,
+				 shadowColor: invertRGBColor(theme.colors.background),
+			 }}>
 				<Image
 					source={{ uri }}
 					style= { styles.image }
@@ -51,7 +56,6 @@ const styles = StyleSheet.create({
 	imageContainer: {
 		flex: 1,
 		borderRadius: 14,
-		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
 			height: 3,
