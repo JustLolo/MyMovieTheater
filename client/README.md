@@ -1,3 +1,28 @@
+- [How 'It works in my computer'](#how-it-works-in-my-computer)
+    - [**API** documentation:](#api-documentation)
+- [Getting Started](#getting-started)
+- [TODO List](#todo-list)
+- [Backend](#backend)
+    - [Running on a cloudflare worker](#running-on-a-cloudflare-worker)
+    - [Why am I using a backend?](#why-am-i-using-a-backend)
+- [Getting Started](#getting-started-1)
+  - [Step 1: Start the Metro Server](#step-1-start-the-metro-server)
+  - [Step 2: Start your Application](#step-2-start-your-application)
+    - [For Android](#for-android)
+    - [For iOS](#for-ios)
+  - [Step 3: Modifying your App](#step-3-modifying-your-app)
+    - [Now what?](#now-what)
+- [Troubleshooting](#troubleshooting)
+    - [Styles aren't updating properly](#styles-arent-updating-properly)
+    - [Clean reinstall](#clean-reinstall)
+- [Releasing the app](#releasing-the-app)
+  - [Android](#android)
+- [Learn More](#learn-more)
+- [For future iOS references](#for-future-ios-references)
+    - [after running](#after-running)
+
+
+
 # How 'It works in my computer'
 Why? Wasting hours trying to make something work is an issue for many people, so, I'm using this at this moment
 ```bash
@@ -135,6 +160,15 @@ yarn install && \
 yarn start:reset-cache
 ```
 
+# Releasing the app
+## Android
+```
+cd ./android && \
+./gradlew assembleRelease && \
+cd ..
+```
+Final bundle located at:
+`.\client\android\app\build\outputs\apk\release\app-release.apk`
 
 
 
