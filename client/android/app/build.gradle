@@ -73,9 +73,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.peliculasapp"
+    namespace "com.gartep.mymovietheater"
     defaultConfig {
-        applicationId "com.peliculasapp"
+        applicationId "com.gartep.mymovietheater"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

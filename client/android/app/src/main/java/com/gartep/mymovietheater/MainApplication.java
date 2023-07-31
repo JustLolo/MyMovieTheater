@@ -1,4 +1,4 @@
-package com.peliculasapp;
+package com.gartep.mymovietheater;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

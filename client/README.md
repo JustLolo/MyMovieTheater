@@ -1,5 +1,3 @@
-# Amovie
-
 # How 'It works in my computer'
 Why? Wasting hours trying to make something work is an issue for many people, so, I'm using this at this moment
 ```bash
@@ -126,10 +124,10 @@ cd android && \
 rm -rf ./build && \
 rm -rf ./app/build && \
 rm -rf ./.gradle && \
-# iOS
-# pending :3
+# iOS && \
+# pending :3 && \
 
-# JS
+# JS && \
 cd .. && \
 rm -rf ./node_modules && \
 yarn cache clean && \
@@ -149,3 +147,21 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+
+# For future iOS references
+### after running 
+```bash
+npx react-native-rename "My Movie Theater" -b "com.gartep.mymovietheater"
+
+Output
+- Make sure to check old .xcodeproj and .xcworkspace in ios folder, please delete them manually.
+- Please make sure to run "npx pod-install" and "watchman watch-del-all" before running the app.
+```
+There is a folder and file in the following location
+`client\ios\PeliculasApp.xcodeproj\project.pbxproj`
+I didn't delete them, bc this this was refering to `.xcodeproj` instead of `*.xcodeproj`
+
+I couldn't run `Please make sure to run "npx pod-install"`, I was using windows, as well as `watchman watch-del-all`
+
+If you like this tool, please give it a star on GitHub: https://github.com/junedomingo/react-native-rename
