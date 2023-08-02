@@ -1,3 +1,4 @@
+import { isValidEndpoint } from '../../common/types';
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -47,7 +48,16 @@ const handler: ExportedHandler<Env> = {
 		const baseEndpointURL = new URL(baseURL);
 		
 		// TODO: check the requested endpoints against the ones located at client/src/api/movieDB.tsx
+
 		baseEndpointURL.pathname += workerURL.pathname;
+
+		const endpoint = `/${workerURL.pathname.split('/')[1]}`;
+		
+		if (!isValidEndpoint(endpoint)) {
+			return new Response(JSON.stringify( 'Invalid endpoint' ), {
+				status: 404,
+			});
+		}
 
 
 		// Best practice is to always use the original request to construct the new request

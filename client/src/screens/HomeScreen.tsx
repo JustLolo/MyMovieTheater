@@ -1,8 +1,7 @@
 import { StackScreenProps } from "@react-navigation/stack"
-import { ActivityIndicator, Dimensions, View, ScrollView } from "react-native"
+import { ActivityIndicator, Dimensions, View, ScrollView, Text } from "react-native"
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import ImageColors from 'react-native-image-colors'
 import { useContext, useEffect } from "react";
 
 import { RootStackParamList } from "../navigation/Navigation"
@@ -11,8 +10,8 @@ import { MoviePoster } from "../components/MoviePoster"
 import { HorizontalSlider } from "../components/HorizontalSlider";
 import { GradientBackground } from "../components/GradientBackground";
 import { getImageColors } from "../helpers/getColores";
-import { ContextProps, GradientContext } from "../context/GradientContext";
-import { API_BASE_URL } from '@env'
+import { GradientContext } from "../context/GradientContext";
+import { API_BASE_URL, NODE_ENV } from '@env';
 
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
 
@@ -44,6 +43,10 @@ export const HomeScreen = ({navigation}: Props) => {
 	if (isLoading) {
 		return (
 			<View style={{ flex: 1, justifyContent: 'center', alignItems:'center'}}>
+				{NODE_ENV === 'development'
+					? <Text>Server: {API_BASE_URL} </Text>
+					: null
+				}
 				<ActivityIndicator color="red" size={ 120 } />
 			</View>
 		)
@@ -69,6 +72,9 @@ export const HomeScreen = ({navigation}: Props) => {
 				
 				{/* Popular movies */}
 				<HorizontalSlider title="Popular" movies={movies.popular}/>
+				{/* <HorizontalSlider title={API_BASE_URL} movies={movies.popular}/> */}
+
+				
 				<HorizontalSlider title="Top" movies={movies.topRated}/>
 				<HorizontalSlider title="Upcoming" movies={movies.upcoming}/>
 			</ScrollView>
