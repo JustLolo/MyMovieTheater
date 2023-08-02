@@ -12,7 +12,8 @@ const movieDB = axios.create({
 	},
 	headers: { 
 		'Origin': 'https://developer.themoviedb.org', 
-		'Authorization': `Bearer ${API_TOKEN}`
+		'Authorization': `Bearer ${API_TOKEN}`,
+		// 'Cache-Control': 'no-store'  // not caching, for dev purposes
 	}
 });
 
