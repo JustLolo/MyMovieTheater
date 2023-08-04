@@ -16,7 +16,10 @@
     - [Styles aren't updating properly](#styles-arent-updating-properly)
     - [Clean reinstall](#clean-reinstall)
 - [Releasing the app](#releasing-the-app)
-  - [Android](#android)
+  - [\[Android\]](#android)
+    - [Generate AAB for releasing](#generate-aab-for-releasing)
+    - [Generate apk for testing](#generate-apk-for-testing)
+    - [Install the app via adb](#install-the-app-via-adb)
 - [Learn More](#learn-more)
 - [For future iOS references](#for-future-ios-references)
     - [after running](#after-running)
@@ -160,15 +163,47 @@ yarn install && \
 yarn start:reset-cache
 ```
 
-# Releasing the app
-## Android
+# [Releasing the app](https://reactnative.dev/docs/signed-apk-android)
+## [Android]
+
+
+```bash
+"$(echo $JAVA_HOME)bin\keytool" -genkeypair -v -storetype PKCS12 -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+```
+### [Generate AAB for releasing](https://reactnative.dev/docs/signed-apk-android#generating-the-release-aab)
+
+
+```bash
+npx react-native build-android --mode=release
+```
+The generated AAB can be found under
+`android/app/build/outputs/bundle/release/app-release.aab`
+and should be ready to be uploaded to Google Play
+
+To test the released ABB with your signature/key run
+```bash
+# delete the current one from your android, you'll get an error if you won't
+adb uninstall \ 
+$(adb shell pm list packages | \
+grep -E com.*.mymovietheater | \
+cut -d':' -f2-)
+
+# Install the AAB one
+yarn android --mode release
+```
+
+
+### Generate apk for testing
 ```
 cd ./android && \
 ./gradlew assembleRelease && \
 cd ..
 ```
-Final bundle located at:
-`.\client\android\app\build\outputs\apk\release\app-release.apk`
+
+### Install the app via adb
+```bash
+adb install -r '.\android\app\build\outputs\apk\release\app-release.apk'
+```
 
 
 
