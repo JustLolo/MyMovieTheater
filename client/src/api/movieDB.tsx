@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Movie, MovieDBResponse, MovieFull } from '../interfaces/movieInterface';
 import { CreditsResponse } from '../interfaces/creditsInterface';
 import { API_BASE_URL, API_TOKEN } from '@env';
+import { handleError } from '../../../common/helpers';
 
 const movieDB = axios.create({
 	baseURL: API_BASE_URL,
@@ -20,23 +21,45 @@ const movieDB = axios.create({
 export async function getMovies(endpoint: GenericEndpoints ) {
 	let movies : Movie[] = [];
 	// TODO: handle errors
+	handleError(movieDB.get<MovieDBResponse>(pathBuilder(endpoint)))
+
+	// const [resp, error] = await handleError(movieDB.get<MovieDBResponse>(pathBuilder(endpoint)))
+	// if (error) {
+	// 	return false
+	// }
+
+
 	const resp = await movieDB.get<MovieDBResponse>(pathBuilder(endpoint))
-	movies = resp.data.results;
+	movies = resp!.data.results;
 	return movies
 }
 
+// function handleError(arg0: Promise<AxiosResponse<MovieDBResponse, any>>) {
+// 	throw new Error('Function not implemented.');
+// }
+
+
+// function handleError(arg0: AxiosResponse<MovieDBResponse, any>) {
+// 	throw new Error('Function not implemented.');
+// }
+
 export async function getMovieDetail(id: number) {
 	// TODO: handle errors
+	handleError(movieDB.get<MovieFull>(pathBuilder('', id)));
+
 	const resp = await movieDB.get<MovieFull>(pathBuilder('', id))
 	return resp.data
 }
 
 export async function getMovieCredits(id: number) {
 	// TODO: handle errors
+	handleError(movieDB.get<CreditsResponse>(pathBuilder('/credits', id)));
+
 	const resp = await movieDB.get<CreditsResponse>(pathBuilder('/credits', id))
 	return resp.data
 }
 
+// TODO: use the types located at common/types.ts
 export type GenericEndpoints = "/now_playing" | "/popular" | "/top_rated" | "/upcoming";
 export type IdEndpoints = "/credits" | ``;
 export type Endpoints = GenericEndpoints | IdEndpoints;

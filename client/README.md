@@ -183,7 +183,7 @@ and should be ready to be uploaded to Google Play
 To test the released ABB with your signature/key run
 ```bash
 # delete the current one from your android, you'll get an error if you won't
-adb uninstall \ 
+adb uninstall \
 $(adb shell pm list packages | \
 grep -E com.*.mymovietheater | \
 cut -d':' -f2-)
