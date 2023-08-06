@@ -12,13 +12,15 @@ type Props = Promise<Movie[]> | Promise<MovieFull> | Promise<CreditsResponse> | 
 // 	}
 // }
 
-export async function handleError<T>(promise: T): Promise<[T | null, any]> {
+export async function handleError<T>(promise: Promise<T>): Promise<[T | null, any]> {
+	// TODO: search for every handleError, if it's using a network call show a notification on error
+	// check react navigation for the previous statement
 	try {
 		const data = await promise;
 		return [data, null]
 	} catch (error) {
-		
-		console.error(error)
+		// TODO: types for error
+		// console.error(error)
 		return [null, error];
 	}
 }

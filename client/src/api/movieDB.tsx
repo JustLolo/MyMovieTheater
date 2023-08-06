@@ -20,16 +20,13 @@ const movieDB = axios.create({
 
 export async function getMovies(endpoint: GenericEndpoints ) {
 	let movies : Movie[] = [];
-	// TODO: handle errors
-	handleError(movieDB.get<MovieDBResponse>(pathBuilder(endpoint)))
+	const [resp, error] = await handleError(movieDB.get<MovieDBResponse>(pathBuilder(endpoint)))
 
-	// const [resp, error] = await handleError(movieDB.get<MovieDBResponse>(pathBuilder(endpoint)))
-	// if (error) {
-	// 	return false
-	// }
+	if (!resp) {
+		console.log("something is wrong")
+		return []
+	}
 
-
-	const resp = await movieDB.get<MovieDBResponse>(pathBuilder(endpoint))
 	movies = resp!.data.results;
 	return movies
 }
@@ -44,18 +41,24 @@ export async function getMovies(endpoint: GenericEndpoints ) {
 // }
 
 export async function getMovieDetail(id: number) {
-	// TODO: handle errors
-	handleError(movieDB.get<MovieFull>(pathBuilder('', id)));
+	const [resp, error] = await handleError(movieDB.get<MovieFull>(pathBuilder('', id)));
 
-	const resp = await movieDB.get<MovieFull>(pathBuilder('', id))
-	return resp.data
+	if (!resp) {
+		console.log("something is wrong")
+		return undefined
+	}
+
+	return resp!.data
 }
 
 export async function getMovieCredits(id: number) {
-	// TODO: handle errors
-	handleError(movieDB.get<CreditsResponse>(pathBuilder('/credits', id)));
+	const [resp, error] = await handleError(movieDB.get<CreditsResponse>(pathBuilder('/credits', id)));
 
-	const resp = await movieDB.get<CreditsResponse>(pathBuilder('/credits', id))
+	if (!resp) {
+		console.log("something is wrong")
+		return undefined
+	}
+
 	return resp.data
 }
 

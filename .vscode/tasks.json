@@ -1,0 +1,10 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+	  {
+		"label": "Android: Open Dev menu",
+		"type": "shell",
+		"command": "adb shell input keyevent 82"
+	  }
+	]
+  }

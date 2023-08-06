@@ -22,18 +22,23 @@ export const useMovies = () => {
 	useEffect(() => {
 		(async () =>{
 			// TODO: check potential race condition in the future
-			const [
-				nowPlaying,
-				popular,
-				topRated,
-				upcoming,
-			] = await Promise.all([
+			const data = await Promise.all([
 				// TODO: check potential antipattern
 				getMovies('/now_playing'),
 				getMovies('/popular'),
 				getMovies('/top_rated'),
 				getMovies('/upcoming'),
 			]);
+
+			if (data.some(d => d.length === 0)) {
+				return
+			}
+
+			const [
+				nowPlaying,
+				popular,
+				topRated,
+				upcoming] = data;
 
 			// TODO: Refactor this even more, use typeof and keyof to simplify this whole repetition
 			setMovieState({

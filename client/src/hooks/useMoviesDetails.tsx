@@ -20,24 +20,26 @@ export const useMoviesDetails = (movieId: number) => {
 
 	useEffect(() => {
 		(async () => {
-			// getMovieDetail('/credits', movieId)
-			// const movieDetails = await getMovieDetail(movieId);
-			// const movieCredits = await getMovieCredits(movieId);
-
-			// TODO: check error management and race condition
-			const [
-				movieDetails,
-				movieCredits,
-			] = await Promise.all([
+			// TODO: check race condition and antipattern
+			const data = await Promise.all([
 				// TODO: check potential antipattern
 				getMovieDetail(movieId),
 				getMovieCredits(movieId),
 			]);
 
+			if (data.some(d => d === undefined)) {
+				return
+			}
+
+			const [
+				movieDetails,
+				movieCredits]
+			= data
+
 			setState({
 				isLoading: false,
 				movieFull: movieDetails,
-				cast: movieCredits.cast
+				cast: movieCredits!.cast
 			});
 
 		})();
