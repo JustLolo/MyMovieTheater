@@ -62,6 +62,7 @@ $ yarn -v
 
 # TODO List
 - [ ] Add environment variables explanation (order) to the readme
+- [ ] Add some tests to the pure functions
 - [ ] check TODOS around the codebase
 - [ ] Remove/Find that warning/error I am getting (I know i shouldn't)
 ```

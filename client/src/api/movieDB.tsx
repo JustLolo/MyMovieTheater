@@ -3,6 +3,7 @@ import { Movie, MovieDBResponse, MovieFull } from '../interfaces/movieInterface'
 import { CreditsResponse } from '../interfaces/creditsInterface';
 import { API_BASE_URL, API_TOKEN } from '@env';
 import { handleError } from '../../../common/helpers';
+import { Endpoints, GenericEndpoints, IdEndpoints } from '../../../common/types';
 
 const movieDB = axios.create({
 	baseURL: API_BASE_URL,
@@ -62,14 +63,9 @@ export async function getMovieCredits(id: number) {
 	return resp.data
 }
 
-// TODO: use the types located at common/types.ts
-export type GenericEndpoints = "/now_playing" | "/popular" | "/top_rated" | "/upcoming";
-export type IdEndpoints = "/credits" | ``;
-export type Endpoints = GenericEndpoints | IdEndpoints;
-
 export function pathBuilder (endpoint: GenericEndpoints ): string;
 export function pathBuilder (endpoint: IdEndpoints, id: number): string;
-export function pathBuilder <T extends GenericEndpoints | IdEndpoints> (endpoint: T, id?: number): string {
+export function pathBuilder <T extends Endpoints> (endpoint: T, id?: number): string {
 	let path = '';
 	if (id != undefined) {
 		path += '/' + id.toString()

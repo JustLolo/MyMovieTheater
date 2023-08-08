@@ -16,7 +16,6 @@ const isIdEndpoints = (x: string): x is IdEndpoints => {
 	const temp = x.split('/');
 	const id = temp[1]
 	const tempIdEndpoint = temp.slice(1, temp.length - 1).join('/')
-	console.log(tempIdEndpoint);
 	
 	if (!isMovieId(id)) {
 		return false;
