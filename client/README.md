@@ -62,6 +62,7 @@ $ yarn -v
 
 # TODO List
 - [ ] Add environment variables explanation (order) to the readme
+- [ ] Add move Postman files to the project
 - [ ] Add some tests to the pure functions
 - [ ] Add documentation (check tsdoc & typedoc)
 - [ ] check TODOS around the codebase
