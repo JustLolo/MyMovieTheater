@@ -7,7 +7,7 @@ import { RootStackParamList } from "../navigation/Navigation"
 import { useMoviesDetails } from "../hooks/useMoviesDetails";
 import { MovieDetails } from "../components/MovieDetails";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { invertRGBColor } from "../helpers/tools";
+import { invertRGBColor, moviePosterURIBuilder } from "../helpers/tools";
 import { useTheme } from "@react-navigation/native";
 
 interface Props extends StackScreenProps<RootStackParamList, 'DetailScreen'> {};
@@ -21,7 +21,7 @@ export const DetailScreen = ({ route, navigation } : Props) => {
 	const theme = useTheme();
 	
 	// TODO: centralize this 
-	const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+	const uri = moviePosterURIBuilder(movie.poster_path)
 
 	return (
 		<ScrollView>

@@ -17,3 +17,19 @@ export function invertRGBColor(rgbString: string) {
 	const invertedRGBString = `rgb(${invertedRed}, ${invertedGreen}, ${invertedBlue})`;
 	return invertedRGBString;
 }
+
+export function moviePosterURIBuilder(MoviePosterPath: string) {
+	/**
+	 * Returns the average of two numbers.
+	 *
+	 * @remarks
+	 * This method is part of the {@link core-library#Statistics | Statistics subsystem}.
+	 *
+	 * @param x - The first input number
+	 * @param y - The second input number
+	 * @returns The arithmetic mean of `x` and `y`
+	 *
+	 * @beta
+	 */
+	return `https://image.tmdb.org/t/p/w500/${MoviePosterPath}`
+}

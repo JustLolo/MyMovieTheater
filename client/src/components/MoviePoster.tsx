@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Movie } from "../interfaces/movieInterface"
 import { NavigationProp, useNavigation, useTheme } from "@react-navigation/native"
 import { RootStackParamList } from '../navigation/Navigation';
-import { invertRGBColor } from "../helpers/tools";
+import { invertRGBColor, moviePosterURIBuilder } from "../helpers/tools";
 
 interface Props {
 	movie: Movie
@@ -16,7 +16,7 @@ export const MoviePoster = ({ movie, height=420, width=300 }: Props) => {
 	const theme = useTheme();
 
 	// centralize this
-	const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+	const uri = moviePosterURIBuilder(movie.poster_path)
 
 	return (
 		<TouchableOpacity

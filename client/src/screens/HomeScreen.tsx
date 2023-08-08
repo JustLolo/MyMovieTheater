@@ -12,6 +12,7 @@ import { GradientBackground } from "../components/GradientBackground";
 import { getImageColors } from "../helpers/getColores";
 import { GradientContext } from "../context/GradientContext";
 import { API_BASE_URL, NODE_ENV } from '@env';
+import { moviePosterURIBuilder } from "../helpers/tools";
 
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
 
@@ -25,7 +26,7 @@ export const HomeScreen = ({navigation}: Props) => {
 
 	const setPosterColors = async ( index: number) => {
 		const movie = movies.nowPlaying[index];
-		const uri = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+		const uri = moviePosterURIBuilder(movie.poster_path)
 
 		const [ primary, secondary ] = await getImageColors( uri );
 
