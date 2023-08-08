@@ -5,7 +5,6 @@ import { Cast } from '../interfaces/creditsInterface';
 
 interface MovieDetails {
 	isLoading: boolean,
-	// TODO: remove this optional
 	movieFull?: MovieFull,
 	cast: Cast[];
 }
