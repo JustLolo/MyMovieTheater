@@ -11,8 +11,7 @@ interface Props {
 
 export const GradientBackground = ({ children }: Props) => {
 
-	// TODO: check this '!' loggin in the GradientContext to check the renders
-	const { colors, prevColors, setPrevMainColors } = useContext(GradientContext)!;
+	const { colors, prevColors, setPrevMainColors } = useContext(GradientContext);
 	const { opacity, fadeIn, fadeOut } = useFade({ duration:175, initialOpacity: 1 });
 	const theme = useTheme();
 

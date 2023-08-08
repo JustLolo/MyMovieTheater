@@ -16,7 +16,18 @@ interface Props {
 	children: JSX.Element;
 }
 
-export const GradientContext = createContext<ContextProps | null>(null)
+export const GradientContext = createContext<ContextProps>({
+	colors: {
+		primary: 'transparent',
+		secondary: 'transparent'
+	},
+	prevColors: {
+			primary: 'transparent',
+			secondary: 'transparent'
+	},
+	setPrevMainColors: () => {},
+	setMainColors: () => {},
+})
 
 export const GradientProvider = ({ children }: Props) => {
 	const [colors, setColors] = useState<ImageColors>({
