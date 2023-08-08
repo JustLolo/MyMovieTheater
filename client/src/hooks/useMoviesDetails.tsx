@@ -19,10 +19,9 @@ export const useMoviesDetails = (movieId: number) => {
 
 
 	useEffect(() => {
+		let ignore = false;
 		(async () => {
-			// TODO: check race condition and antipattern
 			const data = await Promise.all([
-				// TODO: check potential antipattern
 				getMovieDetail(movieId),
 				getMovieCredits(movieId),
 			]);
@@ -35,7 +34,7 @@ export const useMoviesDetails = (movieId: number) => {
 				movieDetails,
 				movieCredits]
 			= data
-
+			
 			setState({
 				isLoading: false,
 				movieFull: movieDetails,
