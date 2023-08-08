@@ -8,8 +8,6 @@ interface Props {
 }
 
 export const CastItem = ({ actor }: Props) => {
-	// console.log(actor.name);
-	// TODO: check fro undefined actor.profile_path
 	const uri = `https://image.tmdb.org/t/p/w500/${actor.profile_path ?? ''}`
 	const theme = useTheme();
 
