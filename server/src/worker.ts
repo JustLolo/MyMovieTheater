@@ -47,8 +47,6 @@ const handler: ExportedHandler<Env> = {
 		const workerURL = new URL(request.url);
 		const baseEndpointURL = new URL(baseURL);
 		
-		// TODO: check the requested endpoints against the ones located at client/src/api/movieDB.tsx
-
 		baseEndpointURL.pathname += workerURL.pathname;
 
 		const endpoint = `/${workerURL.pathname.split('/')[1]}`;
