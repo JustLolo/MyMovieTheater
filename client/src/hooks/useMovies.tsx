@@ -10,7 +10,6 @@ interface MoviesState {
 }
 
 export const useMovies = () => {
-
 	const [ isLoading, setIsLoading ] = useState(true)
 	const [moviesState, setMovieState] = useState<MoviesState>({
 		nowPlaying: [],
@@ -21,7 +20,6 @@ export const useMovies = () => {
 
 	useEffect(() => {
 		(async () =>{
-			// TODO: check potential race condition in the future
 			const data = await Promise.all([
 				// TODO: check potential antipattern
 				getMovies('/now_playing'),
