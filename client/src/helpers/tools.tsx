@@ -1,3 +1,5 @@
+import { NativeModules, Platform } from "react-native";
+
 export function invertRGBColor(rgbString: string) {
 	// Extract the RGB components from the string
 	const match = rgbString.match(/\d+/g);
@@ -19,17 +21,23 @@ export function invertRGBColor(rgbString: string) {
 }
 
 export function moviePosterURIBuilder(MoviePosterPath: string) {
-	/**
-	 * Returns the average of two numbers.
-	 *
-	 * @remarks
-	 * This method is part of the {@link core-library#Statistics | Statistics subsystem}.
-	 *
-	 * @param x - The first input number
-	 * @param y - The second input number
-	 * @returns The arithmetic mean of `x` and `y`
-	 *
-	 * @beta
-	 */
 	return `https://image.tmdb.org/t/p/w500/${MoviePosterPath}`
+}
+
+export function getDeviceLanguage() {
+	// supported only english and spanish
+	let deviceLanguage: string =
+          Platform.OS === 'ios'
+            ? NativeModules.SettingsManager.settings.AppleLocale ||
+              NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
+            : NativeModules.I18nManager.localeIdentifier; // Android
+
+	const [language, region] = deviceLanguage.split('_')
+	if (language === 'es') {
+		console.log('es');
+		
+		return "es-US"
+	} else {
+		return "en-US"
+	}
 }

@@ -7,9 +7,6 @@ export type IdEndpoints = typeof idEndpoints[number];
 
 export type Endpoints = GenericEndpoints | IdEndpoints;
 
-
-
-
 const isGenericEndpoint = (x: string): x is GenericEndpoints => genericEndpoints.includes(x as GenericEndpoints);
 const isIdEndpoints = (x: string): x is IdEndpoints => {
 	
@@ -32,3 +29,7 @@ export const isMovieId = (id: string) => {
     const isPositive = number > 0;
     return isInteger && isPositive;
 }
+
+export const params = ["language"] as const;
+export type Params = typeof params[number];
+export const isValidParams = (x: string): x is Params => params.includes(x as Params);

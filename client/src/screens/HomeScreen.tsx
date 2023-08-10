@@ -12,7 +12,7 @@ import { GradientBackground } from "../components/GradientBackground";
 import { getImageColors } from "../helpers/getColores";
 import { GradientContext } from "../context/GradientContext";
 import { API_BASE_URL, NODE_ENV } from '@env';
-import { moviePosterURIBuilder } from "../helpers/tools";
+import { getDeviceLanguage, moviePosterURIBuilder } from "../helpers/tools";
 
 interface Props extends StackScreenProps<RootStackParamList, "HomeScreen"> {};
 
@@ -22,7 +22,8 @@ export const HomeScreen = ({navigation}: Props) => {
 
 	const { isLoading, movies } = useMovies();
 	const { top } = useSafeAreaInsets();
-	const { setMainColors }  = useContext(GradientContext)!;
+	const { setMainColors }  = useContext(GradientContext);
+	const language = getDeviceLanguage().split('-')[0]
 
 	const setPosterColors = async ( index: number) => {
 		const movie = movies.nowPlaying[index];
@@ -74,10 +75,8 @@ export const HomeScreen = ({navigation}: Props) => {
 				{/* Popular movies */}
 				<HorizontalSlider title="Popular" movies={movies.popular}/>
 				{/* <HorizontalSlider title={API_BASE_URL} movies={movies.popular}/> */}
-
-				
 				<HorizontalSlider title="Top" movies={movies.topRated}/>
-				<HorizontalSlider title="Upcoming" movies={movies.upcoming}/>
+				<HorizontalSlider title={language == 'es' ? 'Proximamente' : 'Upcoming'} movies={movies.upcoming}/>
 			</ScrollView>
 		</GradientBackground>
 	)

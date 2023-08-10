@@ -4,13 +4,16 @@ import { CreditsResponse } from '../interfaces/creditsInterface';
 import { API_BASE_URL, API_TOKEN } from '@env';
 import { handleError } from '../../../common/helpers';
 import { Endpoints, GenericEndpoints, IdEndpoints } from '../../../common/types';
+import { getDeviceLanguage } from '../helpers/tools';
+
+const language = getDeviceLanguage()
 
 const movieDB = axios.create({
 	baseURL: API_BASE_URL,
 	method: 'get',
 	maxBodyLength: Infinity,
 	params: {
-		language: 'en-US'
+		language
 	},
 	headers: { 
 		'Origin': 'https://developer.themoviedb.org', 
@@ -24,22 +27,15 @@ export async function getMovies(endpoint: GenericEndpoints ) {
 	const [resp, error] = await handleError(movieDB.get<MovieDBResponse>(pathBuilder(endpoint)))
 
 	if (!resp) {
-		console.log("something is wrong")
+		console.log(`Error getting ${endpoint}:`, error.message)
+		
 		return []
 	}
+	console.log(resp.data.results[0].overview)
 
-	movies = resp!.data.results;
+	movies = resp.data.results;
 	return movies
 }
-
-// function handleError(arg0: Promise<AxiosResponse<MovieDBResponse, any>>) {
-// 	throw new Error('Function not implemented.');
-// }
-
-
-// function handleError(arg0: AxiosResponse<MovieDBResponse, any>) {
-// 	throw new Error('Function not implemented.');
-// }
 
 export async function getMovieDetail(id: number) {
 	const [resp, error] = await handleError(movieDB.get<MovieFull>(pathBuilder('', id)));

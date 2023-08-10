@@ -20,7 +20,6 @@ export const DetailScreen = ({ route, navigation } : Props) => {
 	const insets = useSafeAreaInsets();
 	const theme = useTheme();
 	
-	// TODO: centralize this 
 	const uri = moviePosterURIBuilder(movie.poster_path)
 
 	return (

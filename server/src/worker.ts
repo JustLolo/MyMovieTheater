@@ -1,4 +1,4 @@
-import { isValidEndpoint } from '../../common/types';
+import { isValidEndpoint, isValidParams, params } from '../../common/types';
 
 /**
  * Welcome to Cloudflare Workers! This is your first worker.
@@ -34,7 +34,6 @@ export interface Env {
 const handler: ExportedHandler<Env> = {
 	async fetch(request, env) {
 		const newRequestInit = {
-			// Change method
 			method: "GET",
 			redirect: "follow",
 			headers: {
@@ -44,10 +43,25 @@ const handler: ExportedHandler<Env> = {
 		};
 
 		const baseURL = "https://api.themoviedb.org/3/movie";
-		const workerURL = new URL(request.url);
 		const baseEndpointURL = new URL(baseURL);
+
+		const workerURL = new URL(request.url);
 		
+		// checking for valid param
+		const workerQueryString = workerURL.search.slice(1).split('&')
+		for (let query of workerQueryString) {
+			const [k, v] = query.split('=');
+			if (!isValidParams(k)) {
+				return new Response(JSON.stringify(`${k} is not a valid Param`), {
+					status: 400,
+				});
+			}
+		}
+
 		baseEndpointURL.pathname += workerURL.pathname;
+		baseEndpointURL.search = workerURL.search;
+		// console.log(workerURL.search)
+
 
 		const endpoint = `/${workerURL.pathname.split('/')[1]}`;
 		
@@ -71,6 +85,18 @@ const handler: ExportedHandler<Env> = {
 		// let requestHeaders = JSON.stringify(headersObject, null, 2);
 		// console.log(`Request headers: ${requestHeaders}`);
 		
+		// log params
+		// const params: any = {};
+		// const url = new URL(request.url);
+		// const queryString = url.search.slice(1).split('&')
+
+		// queryString.forEach(item => {
+		// 	const kv = item.split('=')
+		// 	if (kv[0]) params[kv[0]] = kv[1] || true
+		// })
+		// console.log(`Request Params: ${JSON. stringify(params)}`);
+		
+		console.log(newRequest.url)
 
 		try {
 			return await fetch(newRequest as RequestInfo);

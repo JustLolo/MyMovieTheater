@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { MovieFull } from '../interfaces/movieInterface';
 import { Cast } from '../interfaces/creditsInterface';
 import { CastItem } from './CastItem';
+import { getDeviceLanguage } from "../helpers/tools";
 
 interface Props {
 	movieFull: MovieFull;
@@ -11,6 +12,7 @@ interface Props {
 
 export const MovieDetails = ({ movieFull , cast}: Props) => {
 	// console.log(movieFull);
+	const language = getDeviceLanguage().split('-')[0]
 
 	return (
 		<>
@@ -32,7 +34,7 @@ export const MovieDetails = ({ movieFull , cast}: Props) => {
 
 				{/* Overview */}
 				<Text style={{ fontSize: 23, fontWeight: 'bold' }}>
-					Overview
+					{ language === 'es' ? 'Sinopsis' : 'Overview' }
 				</Text>
 
 				<Text style={{ marginBottom: 8 }}>
@@ -41,7 +43,8 @@ export const MovieDetails = ({ movieFull , cast}: Props) => {
 
 				{/* Budget */}
 				<Text style={{ fontSize: 23, fontWeight: 'bold' }}>
-					Budget
+					{ language === 'es' ? 'Presupuesto' : 'Budget' }
+					
 				</Text>
 
 				<Text>
@@ -52,7 +55,6 @@ export const MovieDetails = ({ movieFull , cast}: Props) => {
 				paddingBottom: 8,
 			}}>
 				<Text style={{ 
-					color: 'black',
 					fontSize: 23,
 					fontWeight: 'bold',
 					
@@ -60,7 +62,7 @@ export const MovieDetails = ({ movieFull , cast}: Props) => {
 					marginHorizontal: 20,
 					zIndex: 1,
 				}}>
-					Actores
+					{ language === 'es' ? 'Actores' : 'Actors' }
 				</Text>
 				<FlatList
 					horizontal
